@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysqlLibrary
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: library
+
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+  consul:
+    image: consul
+    container_name: consul
+    ports:
+      - "8500:8500"
+    command: "agent -server -bootstrap-expect=1 -ui -client=0.0.0.0"
