@@ -7,9 +7,8 @@ spring:
       port: 8500
       config:
         enabled: true
-        format: key_value
-        data-key: SECRET_KEY
-
+        format: properties
+        prefixes: config/myapp
 
   datasource:
     url: jdbc:mysql://localhost:3306/library
@@ -21,3 +20,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+SECRET_KEY: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"

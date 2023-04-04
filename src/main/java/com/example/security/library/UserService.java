@@ -7,6 +7,7 @@ import com.example.security.user.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class UserService {
     UserRepository repository;
     @Autowired
     BookRepository bookRepository;
+    @Value("${SECRET_KEY}")
+    private String SECRET_KEY ;
 
     public ResponseEntity<?> addUser(User user) {
         try {
@@ -32,7 +35,7 @@ public class UserService {
 
     public List<Book> getUserByToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey("404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970")
+                .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
 
