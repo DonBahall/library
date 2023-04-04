@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class MainController {
   final BookService service;
   final UserService userService;
@@ -43,5 +44,10 @@ public class MainController {
   @PreAuthorize("hasAuthority('USER')")
   public String getBook(Long id) {
     return service.getBook(id);
+  }
+
+  @GetMapping("/me")
+  public List<Book> getCurrentUser(String token) {
+    return userService.getUserByToken(token);
   }
 }
