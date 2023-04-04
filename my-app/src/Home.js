@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 
 function Home() {
-    const [user, setUser] = useState(null);
+    const [book, setBook] = useState(null);
     let token = Cookies.get('token')
     useEffect(() => {
         async function getUserProfile() {
@@ -12,7 +12,7 @@ function Home() {
                     method: 'GET',
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setUser(response.data);
+                setBook(response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -20,15 +20,14 @@ function Home() {
         getUserProfile();
     }, [token]);
 
-    if (!user) {
+    if (!book) {
         return <div>Loading...</div>;
     }
 
     return (
         <div>
-            <h2>{user.name}</h2>
-            <p>Email: {user.email}</p>
-            <p>Role: {user.role}</p>
+            <h2>{book.id}</h2>
+            <p>Book: {book.get("book")}</p>
         </div>
     );
 }
